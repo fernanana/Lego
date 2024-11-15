@@ -1,0 +1,49 @@
+{% extends "componentes/header.html" %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}Inicio Sesion{% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="mainLogin">
+        {% if user.is_authenticated %}
+        <script>window.location.href = '/Inicio/{{ user.id }}';</script>
+        {% else %}
+        <h2>Iniciar sesión</h2>
+        <form id="Formulario" method="POST">
+            {{ form }}
+            {% csrf_token %}
+            <input value="Iniciar Sesión" type="submit">
+        </form>
+        <p>¿Aún no tienes cuenta? <a href="/Register/">Regístrate ya!</a></p>
+        {% endif %}
+    </div>
+
+    <footer>
+        <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+        </ul>
+        <ul>
+            <li><a style="color: #C4BAF5;">Ubicación</a></li>
+            <li><a> Avenida Andrés Bello 2425, local 1149 Santiago de Chile 7510689</a></li>
+        </ul>
+        <ul>
+            <li><a style="color: #C4BAF5;">Copyright © Propiedad artística © 2024 LEGO Chile</a></li>
+        </ul>
+    </footer>
+    {% endblock %}
+</body>
+
+</html>

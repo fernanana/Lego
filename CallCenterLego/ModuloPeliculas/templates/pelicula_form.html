@@ -1,0 +1,157 @@
+{% extends "componentes/header.html" %}
+
+{% block content %}
+  <div class="container mt-5">
+        <h2 class="mb-4 text-white">{% if form.instance.id %}Editar{% else %}Crear{% endif %} Película</h2>
+        <style>
+            .container {
+                background-color: rgba(221, 0, 0, 0.8);
+                border-radius: 10px;
+                padding: 20px;
+            }
+
+            .form-label {
+                color: rgb(0, 0, 0); 
+            }
+
+            .form-control {
+                background-color: rgba(255, 218, 218, 0.5); 
+                border: 1px solid rgba(0, 0, 0, 0.7);
+                border-radius: 5px; 
+            }
+
+            .btn-primary {
+                background-color: rgb(254, 106, 0); 
+                border: none; 
+                border-radius: 25px; 
+                padding: 10px 20px; 
+                color: rgb(0, 0, 0); 
+                transition: background-color 0.3s;
+            }
+
+            .btn-primary:hover {
+                background-color: rgba(230, 153, 0, 0.9); 
+            }
+
+            .btn-secondary {
+                background-color: rgb(254, 106, 0);
+                border-radius: 25px;
+                color: rgb(0, 0, 0); 
+                transition: background-color 0.3s; 
+            }
+
+            .btn-secondary:hover {
+                background-color: rgba(230, 153, 0, 0.9);
+            }
+
+            .text-danger {
+                font-weight: bold; 
+                color: yellow; 
+            }
+
+            input[type="file"] {
+                display: none; 
+            }
+
+            .custom-file-upload {
+                display: inline-block;
+                padding: 10px 20px; 
+                border-radius: 25px; 
+                background-color: rgb(254, 106, 0); 
+                color: rgb(0, 0, 0); 
+                text-align: center; 
+                cursor: pointer; 
+                transition: background-color 0.3s; 
+            }
+
+            .custom-file-upload:hover {
+                background-color: rgba(230, 153, 0, 0.9); 
+            }
+        </style>
+
+    <form method="post" enctype="multipart/form-data" class="my-form">
+
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="{{ form.sucursal.id_for_label }}" class="form-label text-white">Sucursal de la cadena:</label>
+        {{ form.sucursal }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.nombre.id_for_label }}" class="form-label text-white">Nombre de la película:</label>
+        {{ form.nombre }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.genero.id_for_label }}" class="form-label text-white">Género:</label>
+        {{ form.genero }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.clasificacion.id_for_label }}" class="form-label text-white">Clasificación:</label>
+        {{ form.clasificacion }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.duracion.id_for_label }}" class="form-label text-white">Duración (minutos):</label>
+        {{ form.duracion }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.resena.id_for_label }}" class="form-label text-white">Reseña:</label>
+        {{ form.resena }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.sala.id_for_label }}" class="form-label text-white">Sala en la que se exhibe:</label>
+        {{ form.sala }}
+        {% for error in form.sala.errors %}
+          <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.fecha_exhibicion.id_for_label }}" class="form-label text-white">Fecha de la exhibición:</label>
+        {{ form.fecha_exhibicion }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.hora_exhibicion.id_for_label }}" class="form-label text-white">Hora de la exhibición:</label>
+        {{ form.hora_exhibicion }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.valor_ticket.id_for_label }}" class="form-label text-white">Valor del ticket:</label>
+        {{ form.valor_ticket }}
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.imagen.id_for_label }}" class="form-label text-white">Imagen de la película:</label>
+        <label for="{{ form.imagen.id_for_label }}" class="custom-file-upload">Seleccionar Imagen</label>
+        {{ form.imagen }}
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      <br>
+      <a href="{% url 'pelicula-list' %}" class="btn btn-secondary mt-3">Volver al Listado de Películas</a>
+      <br>
+      <br>
+
+      {% if form.errors %}
+        <div class="alert alert-danger mt-3" role="alert">
+          <strong class="text-white">Por favor, corrija los siguientes errores en el formulario:</strong>
+          <ul class="text-white">
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}
+                <li>{{ field|title }}: {{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+    </form>
+  </div>
+  <br><br>
+{% endblock %}

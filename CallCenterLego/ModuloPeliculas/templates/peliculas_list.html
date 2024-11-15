@@ -1,0 +1,63 @@
+{% extends "componentes/header.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+  .card {
+    height: 550px;
+    width: 300px;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.05); 
+  }
+
+  .card img {
+    max-height: 100%;
+  }
+
+  .card-body {
+    text-align: center;
+  }
+
+  .card-body h5 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-body .btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+</style>
+
+<div class="row mx-auto">
+  {% for pelicula in peliculas %}
+  <div class="col-md-4 mb-4">
+    <div class="card mx-auto">
+      {% if pelicula.imagen %}
+      <img src="{{ pelicula.imagen.url }}" class="card-img-top" alt="{{ pelicula.nombre }}" style="max-height: 100%;">
+      {% else %}
+      <img src="{% static 'images/not-found.png' %}" class="card-img-top" alt="Sin imagen" style="max-height: 100%;">
+      {% endif %}
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ pelicula.nombre}}</h5>
+        <p class="card-text"><strong>Género:</strong> {{ pelicula.get_genero_display }}</p>
+        <p class="card-text"><strong>Clasificación:</strong> {{ pelicula.get_clasificacion_display }}</p>
+
+        <div class="mx-auto ta-c10">
+          <a href="{% url 'pelicula-detail' id=pelicula.id %}" class="btn btn-info w-100">Ver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+{% endblock %}
+

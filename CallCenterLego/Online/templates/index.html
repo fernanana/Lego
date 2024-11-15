@@ -1,0 +1,47 @@
+{% extends "componentes/header.html" %}
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="Banner">
+    <div class="contLeft"></div>
+    <div class="contRight">
+        <h1>Bienvenido a Call de Lego!</h1>
+        <p>Comunícate con el mejor call center, nosotros te brindaremos la solución necesaria para tu problema. ¡No dudes más!</p>
+        <div class="contBtn">
+            <button id="btnIngresar" onclick="window.location.href = '/Login/'">Ingresar</button>
+        </div>
+    </div>
+</div>
+
+<div class="mainCard">
+    <div class="iCard"></div>
+    <div class="dCard">
+        <h1>Atención 24/7</h1>
+        <p>Comunícate con el mejor call center gamer, nosotros te brindaremos la solución necesaria para tu problema. ¡No dudes más!</p>
+    </div>
+</div>
+
+<div class="finalBody">
+    <h1>Comunícate con nosotros</h1>
+    <p>Escríbenos y nuestros profesionales solucionarán tu problema en tan solo un momento!</p>
+    <div class="contBtn" style="margin-top: 65px;">
+        <button id="btnIngresar" onclick="window.location.href = '/Login/'">Ingresar</button>
+    </div>
+</div>
+
+<footer>
+    <ul>
+        <li><a>Instagram</a></li>
+        <li><a>Facebook</a></li>
+    </ul>
+    <ul>
+        <li><a style="color: #C4BAF5;">Ubicación</a></li>
+        <li><a>Avenida Andrés Bello 2425, local 1149 Santiago de Chile 7510689</a></li>
+    </ul>
+    <ul>
+        <li><a style="color: #C4BAF5;">Copyright © Propiedad artística © 2024 LEGO Chile</a></li>
+    </ul>
+</footer>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "componentes/header.html" %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'inicio.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Inicio {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    {% if user.id == id and user.admin == False and user.tecnico == False %}
+
+    <!-- LISTAR PREGUNTAS RELACIONADAS CON EL USUARIO  -->
+   
+    <div class="MainTodo">
+        <div class="MainPreguntar">
+            <div class="InsPreguntas">
+                <form method="post">
+                    {{form}}
+                    {% csrf_token %}
+                    <input type="submit" value="Insertar pregunta">
+                </form>
+            </div>
+        </div>
+        <div class="MainPreguntas">
+            <div id="Titulo">
+                <h2>Historial de tus preguntas</h2>
+            </div>
+            {% for pregunta in Preguntas %}
+            <div class="Preguntas">
+                <a href="/Respuesta/{{ user.id }}/{{pregunta.idPregunta}}">
+                <h1>Titulo: {{pregunta.Titulo}}</h1>
+                <h4>{{pregunta.Fecha_creacion}}</h1>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer>
+        <ul>
+            <li><a>Instagram</a></li>
+            <li><a>Facebook</a></li>
+        </ul>
+        <ul>
+            <li><a style="color: #C4BAF5;">Ubicación</a></li>
+            <li><a> Avenida Andrés Bello 2425, local 1149 Santiago de Chile 7510689</a></li>
+        </ul>
+        <ul>
+            <li><a style="color: #C4BAF5;">Copyright © Propiedad artística © 2024 LEGO Chile</a></li>
+        </ul>
+    </footer>
+    {% else %}
+    {% if user.admin or user.tecnico%}
+    <script>window.location.href = '/Administracion/';</script>
+    {% endif %}
+    <script>window.location.href = '/Inicio/{{ user.id }}';</script>
+    {% endif %}
+    {% endblock %}
+</body>
+
+</html>

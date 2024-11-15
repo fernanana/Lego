@@ -1,0 +1,54 @@
+{% extends "componentes/header.html" %}
+{% load static %}
+{% block links%}
+<link rel="stylesheet" href="{% static 'modificar.css' %}">
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Modificar {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    {% if user.admin == False%}
+    {% if user.tecnico == True %}
+    <script>window.location.href = '/Administracion/';</script>
+    {% endif%}
+    <script>window.location.href = '/Inicio/{{ user.id }}';</script>
+    {% else %}
+    <h1 id="TituloMod">Modificar pregunta</h1>
+    <div class="MainTodo">
+        <div class="MainPreguntar">
+            <div class="InsPreguntas">
+                <form method="post">
+                    {{form}}
+                    {% csrf_token %}
+                    <input type="submit" value="Modificar pregunta">
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <footer>
+        <ul>
+            <li><a style="color: #C4BAF5;">Contacto</a></li>
+            <li><a>Instagram</a></li>
+            <li><a>Facebook</a></li>
+        </ul>
+        <ul>
+            <li><a style="color: #C4BAF5;">Ubicación</a></li>
+            <li><a> Av. Américo Vespucio 974, Maipú, Región Metropolitana</a></li>
+        </ul>
+        <ul>
+            <li><a style="color: #C4BAF5;">Copyright © 2022-2022 Boris & Boris Company - Todos los derechos reservados</a></li>
+        </ul>
+    </footer>
+    {% endblock %}
+</body>
+
+</html>
